@@ -53,7 +53,7 @@ podTemplate(label: 'mypod', serviceAccount: 'jenkins', containers: [
                                     sh "docker pull ubuntu"
                                 }
                             }
-                        }
+                        },
                         HelmContainer: {
                             container('helm'){
                                 stage('Helm'){
@@ -61,7 +61,7 @@ podTemplate(label: 'mypod', serviceAccount: 'jenkins', containers: [
                                     sh "helm status jenkins"
                                 }
                             }
-                        }
+                        },
                         KubectlContainer: {
                             container('kubectl'){
                                 stage('Kubectl'){
@@ -91,7 +91,7 @@ podTemplate(label: 'mypod', serviceAccount: 'jenkins', containers: [
                                     sh "docker pull ubuntu"
                                 }
                             }
-                        }
+                        },
                         HelmContainer: {
                             container('helm'){
                                 stage('Helm'){
@@ -99,7 +99,7 @@ podTemplate(label: 'mypod', serviceAccount: 'jenkins', containers: [
                                     sh "helm status jenkins"
                                 }
                             }
-                        }
+                        },
                         KubectlContainer: {
                             container('kubectl'){
                                 stage('Kubectl'){
