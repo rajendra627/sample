@@ -131,12 +131,6 @@ podTemplate(label: 'mypod', serviceAccount: 'jenkins', containers: [
                                     sh 'apk update && apk add ca-certificates && update-ca-certificates && apk add openssl && apk add wget'
                                     sh 'mvn -B clean test -Dselenium.browser=chrome -Dsurefire.rerunFailingTestsCount=5 -Dsleep=0 -DproxySet=true -DproxyHost=proxy.esl.cisco.com -DproxyPort=80'
                                 }
-                                post {
-                                    always {
-                                        archive "target/**/*"
-                                        junit 'target/surefire-reports/*.xml'
-                                    }
-                                }
                             }
                         }
                     )
