@@ -120,13 +120,6 @@ podTemplate(label: 'mypod', serviceAccount: 'jenkins', containers: [
                                     sh 'echo "64.102.255.40   proxy.esl.cisco.com" >> /etc/hosts'
                                     sh 'apk update && apk add ca-certificates && update-ca-certificates && apk add openssl && apk add wget'
                                 }
-                                post {
-                                    always {
-                                        archive "target/**/*"
-                                        junit 'target/surefire-reports/*.xml'
-                                        junit 'build/reports/**/*.xml'
-                                    }
-                                }
                             }
                         },
                         chrome: {
@@ -142,7 +135,6 @@ podTemplate(label: 'mypod', serviceAccount: 'jenkins', containers: [
                                     always {
                                         archive "target/**/*"
                                         junit 'target/surefire-reports/*.xml'
-                                        junit 'build/reports/**/*.xml'
                                     }
                                 }
                             }
