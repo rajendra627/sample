@@ -47,8 +47,9 @@ podTemplate(label: 'mypod', serviceAccount: 'jenkins', containers: [
                     }
                 }
                 Tools: {
-                    git 'https://github.com/carlossg/selenium-example.git'
-
+                    stage('Checkout Tools Source Code'){
+                        git 'https://github.com/carlossg/selenium-example.git'
+                    }
                 }
 
             )
