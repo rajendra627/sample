@@ -45,8 +45,8 @@ podTemplate(label: 'mypod', serviceAccount: 'jenkins', containers: [
                             sh "kubectl get all --all-namespaces"
                         }
                     }
-                }
-                Tools: {
+                },
+                TOOLS: {
                     stage('Checkout Tools Source Code'){
                         git 'https://github.com/carlossg/selenium-example.git'
                     }
@@ -75,7 +75,7 @@ podTemplate(label: 'mypod', serviceAccount: 'jenkins', containers: [
                             sh "kubectl get all --all-namespaces"
                         }
                     }
-                }
+                },
                 TOOLS-TEST: {
                     parallel (
                         firefox: {
