@@ -56,7 +56,7 @@ podTemplate(label: 'mypod', serviceAccount: 'jenkins', containers: [
         }
         stage('Build & Unit Test') {
             parallel(
-                DUT-BUILD: {
+                DUTBUILD: {
                     container('docker'){
                         stage ('Docker') {
                             sh "docker info"
@@ -76,7 +76,7 @@ podTemplate(label: 'mypod', serviceAccount: 'jenkins', containers: [
                         }
                     }
                 },
-                TOOLS-TEST: {
+                TOOLSTEST: {
                     parallel (
                         firefox: {
                             container('maven-firefox') {
