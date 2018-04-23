@@ -74,7 +74,7 @@ podTemplate(label: 'mypod', serviceAccount: 'jenkins', containers: [
                 },
                 TOOLS: {
                     stage('Checkout Tools Source Code'){
-                        git 'https://github.com/carlossg/selenium-example.git'
+                        git 'https://github.com/executeautomation/SeleniumWithCucucumber.git'
                     }
                 }
 
