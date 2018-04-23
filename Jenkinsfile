@@ -28,16 +28,22 @@ podTemplate(label: 'mypod', serviceAccount: 'jenkins', containers: [
             parallel (
                 DUT: {
                     container('docker'){
-                        sh "docker info"
-                        sh "docker pull ubuntu"
+                        stage ('Docker') {
+                            sh "docker info"
+                            sh "docker pull ubuntu"
+                        }
                     }
                     container('helm'){
-                        sh "helm ls"
-                        sh "helm status jenkins"
+                        stage('Helm'){
+                            sh "helm ls"
+                            sh "helm status jenkins"
+                        }
                     }
                     container('kubectl'){
-                        sh "kubectl version"
-                        sh "kubectl get all --all-namespaces"
+                        stage('Kubectl'){
+                            sh "kubectl version"
+                            sh "kubectl get all --all-namespaces"
+                        }
                     }
                 }
                 Tools: {
