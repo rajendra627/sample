@@ -44,25 +44,33 @@ podTemplate(label: 'mypod', serviceAccount: 'jenkins', containers: [
         ////////// Step 1 //////////
         stage('Git Clone') {
             parallel (
-                DUT: {
-                    container('docker'){
-                        stage ('Docker') {
-                            sh "docker info"
-                            sh "docker pull ubuntu"
+                DUT-Clone: {
+                    parallel (
+                        DockerContainer: {
+                            container('docker'){
+                                stage ('Docker') {
+                                    sh "docker info"
+                                    sh "docker pull ubuntu"
+                                }
+                            }
                         }
-                    }
-                    container('helm'){
-                        stage('Helm'){
-                            sh "helm ls"
-                            sh "helm status jenkins"
+                        Helm-Container: {
+                            container('helm'){
+                                stage('Helm'){
+                                    sh "helm ls"
+                                    sh "helm status jenkins"
+                                }
+                            }
                         }
-                    }
-                    container('kubectl'){
-                        stage('Kubectl'){
-                            sh "kubectl version"
-                            sh "kubectl get all --all-namespaces"
+                        Kubectl-Container: {
+                            container('kubectl'){
+                                stage('Kubectl'){
+                                    sh "kubectl version"
+                                    sh "kubectl get all --all-namespaces"
+                                }
+                            }
                         }
-                    }
+                    )
                 },
                 TOOLS: {
                     stage('Checkout Tools Source Code'){
@@ -75,24 +83,32 @@ podTemplate(label: 'mypod', serviceAccount: 'jenkins', containers: [
         stage('Build & Unit Test') {
             parallel(
                 DUTBUILD: {
-                    container('docker'){
-                        stage ('Docker') {
-                            sh "docker info"
-                            sh "docker pull ubuntu"
+                    parallel (
+                        DockerContainer: {
+                            container('docker'){
+                                stage ('Docker') {
+                                    sh "docker info"
+                                    sh "docker pull ubuntu"
+                                }
+                            }
                         }
-                    }
-                    container('helm'){
-                        stage('Helm'){
-                            sh "helm ls"
-                            sh "helm status jenkins"
+                        Helm-Container: {
+                            container('helm'){
+                                stage('Helm'){
+                                    sh "helm ls"
+                                    sh "helm status jenkins"
+                                }
+                            }
                         }
-                    }
-                    container('kubectl'){
-                        stage('Kubectl'){
-                            sh "kubectl version"
-                            sh "kubectl get all --all-namespaces"
+                        Kubectl-Container: {
+                            container('kubectl'){
+                                stage('Kubectl'){
+                                    sh "kubectl version"
+                                    sh "kubectl get all --all-namespaces"
+                                }
+                            }
                         }
-                    }
+                    )
                 },
                 TOOLSTEST: {
                     parallel (
