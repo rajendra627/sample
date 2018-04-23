@@ -44,7 +44,7 @@ podTemplate(label: 'mypod', serviceAccount: 'jenkins', containers: [
         ////////// Step 1 //////////
         stage('Git Clone') {
             parallel (
-                DUT-Clone: {
+                DUTClone: {
                     parallel (
                         DockerContainer: {
                             container('docker'){
@@ -54,7 +54,7 @@ podTemplate(label: 'mypod', serviceAccount: 'jenkins', containers: [
                                 }
                             }
                         }
-                        Helm-Container: {
+                        HelmContainer: {
                             container('helm'){
                                 stage('Helm'){
                                     sh "helm ls"
@@ -62,7 +62,7 @@ podTemplate(label: 'mypod', serviceAccount: 'jenkins', containers: [
                                 }
                             }
                         }
-                        Kubectl-Container: {
+                        KubectlContainer: {
                             container('kubectl'){
                                 stage('Kubectl'){
                                     sh "kubectl version"
@@ -92,7 +92,7 @@ podTemplate(label: 'mypod', serviceAccount: 'jenkins', containers: [
                                 }
                             }
                         }
-                        Helm-Container: {
+                        HelmContainer: {
                             container('helm'){
                                 stage('Helm'){
                                     sh "helm ls"
@@ -100,7 +100,7 @@ podTemplate(label: 'mypod', serviceAccount: 'jenkins', containers: [
                                 }
                             }
                         }
-                        Kubectl-Container: {
+                        KubectlContainer: {
                             container('kubectl'){
                                 stage('Kubectl'){
                                     sh "kubectl version"
