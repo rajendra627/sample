@@ -130,7 +130,15 @@ podTemplate(label: 'mypod', serviceAccount: 'jenkins', containers: [
                                     sh 'echo "64.102.255.40   proxy.esl.cisco.com" >> /etc/hosts'
                                     sh 'apk update && apk add ca-certificates && update-ca-certificates && apk add openssl && apk add wget'
                                     sh 'mvn -B clean test -Dselenium.browser=chrome -Dsurefire.rerunFailingTestsCount=5 -Dsleep=0 -DproxySet=true -DproxyHost=proxy.esl.cisco.com -DproxyPort=80'
-                                    sh 'sleep 1200'
+                                    publishers {
+                                        archiveTestNG('**/target/test-reports/*.xml') {
+                                            escapeTestDescription()
+                                            escapeExceptionMessages(false)
+                                            showFailedBuildsInTrendGraph()
+                                            markBuildAsUnstableOnSkippedTests(false)
+                                            markBuildAsFailureOnFailedConfiguration()
+                                        }
+                                    }
                                 }
                             }
                         }
